@@ -1,0 +1,4 @@
+include *.py
+recursive-include code *.py
+recursive-include languages *.ts *.qm
+recursive-include resources *.png *.qrc *.desktop
