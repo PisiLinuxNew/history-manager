@@ -51,7 +51,7 @@ class PisiIface(QThread):
     def run(self):
         _max = int(self.pdb.get_last().next().no)
 
-        fetch = self.settings.value("maxhistory", 100)
+        fetch = int(self.settings.value("maxhistory", 100))
 
         _min = _max-fetch
         if _max <= fetch:

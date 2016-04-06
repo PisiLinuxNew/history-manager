@@ -104,6 +104,7 @@ setup(
         name = PROJECT,
         version = about.version,
         description = unicode(about.PACKAGE),
+        scripts = ["script/history-manager"],
         license = unicode('GPL V2'),
         author = "Pisi Linux Developers",
         author_email = about.bugEmail,

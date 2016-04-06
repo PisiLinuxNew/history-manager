@@ -121,13 +121,13 @@ class MainManager(QtWidgets.QWidget):
         item = self.sender().parent()
         self.last_item = item
 
-        self.ui.editGroup.setTitle(self.tr("Details for operation on %s at %s"%(item.op_date, item.op_time)))
+        self.ui.editGroup.setTitle(self.tr("Details for operation on %s at %s")%(item.op_date, item.op_time))
 
         self.ui.aliasLE.setText(unicode(item.ui.labelLabel.text()))
 
         message = ""
         if item.op_type == "snapshot":
-            message += self.tr("There are %s packages in this snapshot."%item.op_pack_len)
+            message += self.tr("There are %s packages in this snapshot.")%item.op_pack_len
         elif item.op_type == "repoupdate":
             for val in item.op_repo:
                 message += "- %s\n" % val
@@ -189,7 +189,7 @@ class MainManager(QtWidgets.QWidget):
 
         message += "<br>"
 
-        self.ui.editGroup.setTitle(self.tr("Takeback plan for Operation on %s at %s"%(item.op_date, item.op_time)))
+        self.ui.editGroup.setTitle(self.tr("Takeback plan for Operation on %s at %s")%(item.op_date, item.op_time))
         self.ui.textEdit.setText(message+information)
 
         self.animator.setFrameRange(TARGET_HEIGHT, self.parent.height() - TARGET_HEIGHT)
@@ -222,7 +222,7 @@ class MainManager(QtWidgets.QWidget):
             return
 
         reply = QtWidgets.QMessageBox.warning(self, self.tr("Takeback operation verification"),
-            self.tr("<center>This will restore your system back to : <b>%s</b> - <b>%s</b><br>"%(item.op_date, item.op_time)) + \
+            self.tr("<center>This will restore your system back to : <b>%s</b> - <b>%s</b><br>")%(item.op_date, item.op_time) + \
             self.tr("If you're unsure, click Cancel and see TakeBack Plan.</center>"),
              QtWidgets.QMessageBox.Cancel | QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
 
@@ -259,7 +259,7 @@ class MainManager(QtWidgets.QWidget):
             self.addNewOperation( self.takeLastOperation() )
             self.enableButtons(True)
         elif signal == "progress":
-            self.status(self.tr("Taking Snapshot : <b>%s</b>/100" % args[1]))
+            self.status(self.tr("Taking Snapshot : <b>%s</b>/100")%args[1])
             self.enableButtons(False)
 
     def closeEvent(self, event=None):
@@ -302,4 +302,4 @@ class ConfigWindow(QtWidgets.QDialog):
         self.settings.setValue("maxhistory", self.ui.maxHistorySB.value())
 
     def resetConfig(self):
-        self.ui.maxHistorySB.setValue(self.settings.value("maxhistory", 100))
+        self.ui.maxHistorySB.setValue(int(self.settings.value("maxhistory", 100)))
