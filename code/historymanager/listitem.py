@@ -46,7 +46,7 @@ class NewOperation(QWidget):
         self.icon = ":/pics/%s.png" % self.op_type
 
         if self.settings.contains("%d/label" % self.op_no):
-            self.alias = self.settings.value("%d/label" % self.op_no).toString()
+            self.alias = str(self.settings.value("%d/label" % self.op_no))
 
         self.ui.labelLabel.setText(self.alias)
 

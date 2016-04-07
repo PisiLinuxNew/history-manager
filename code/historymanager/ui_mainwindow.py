@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainManager(object):
     def setupUi(self, MainManager):
         MainManager.setObjectName("MainManager")
-        MainManager.resize(756, 722)
+        MainManager.resize(680, 600)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
