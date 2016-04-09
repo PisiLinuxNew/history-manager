@@ -38,6 +38,9 @@ def main():
     from historymanager.window import MainManager
 
     app = QApplication(sys.argv)
+    app.setOrganizationName("history-manager")
+    app.setApplicationName("history-manager")
+    app.setApplicationVersion(about.version)
 
     dirPath = dirname(__file__)
 

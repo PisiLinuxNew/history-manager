@@ -227,7 +227,7 @@ class MainManager(QtWidgets.QWidget):
              QtWidgets.QMessageBox.Cancel | QtWidgets.QMessageBox.Ok, QtWidgets.QMessageBox.Ok)
 
         if reply == QtWidgets.QMessageBox.Ok:
-            self.status(self.tr("Taking back to : %s"%item.op_date))
+            self.status(self.tr("Taking back to : %s")%item.op_date)
             self.enableButtons(False)
 
             self.app.processEvents()
@@ -256,7 +256,7 @@ class MainManager(QtWidgets.QWidget):
             self.status(" ".join(args))
         elif signal == "finished":
             self.status(self.tr("Finished succesfully"))
-            self.addNewOperation( self.takeLastOperation() )
+            self.addNewOperation(self.takeLastOperation())
             self.enableButtons(True)
         elif signal == "progress":
             self.status(self.tr("Taking Snapshot : <b>%s</b>/100")%args[1])
@@ -272,8 +272,8 @@ class MainManager(QtWidgets.QWidget):
             event.accept()
 
     def saveConfig(self):
-        self.settings.setValue("pos", QtCore.QVariant(self.mapToGlobal(self.parent.pos())))
-        self.settings.setValue("size", QtCore.QVariant(self.parent.size()))
+        self.settings.setValue("pos", self.mapToGlobal(self.parent.pos()))
+        self.settings.setValue("size", self.parent.size())
         self.settings.sync()
 
     def eventFilter(self, obj, event):
