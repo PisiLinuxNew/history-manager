@@ -1,8 +1,8 @@
-SOURCES += code/historymanager/listitem.py
-SOURCES += code/historymanager/ui_configure.py
-SOURCES += code/historymanager/ui_mainwindow.py
-SOURCES += code/historymanager/ui_uiitem.py
-SOURCES += code/historymanager/window.py
+SOURCES += historymanager/libhistorymanager/listitem.py
+SOURCES += historymanager/libhistorymanager/ui_configure.py
+SOURCES += historymanager/libhistorymanager/ui_mainwindow.py
+SOURCES += historymanager/libhistorymanager/ui_uiitem.py
+SOURCES += historymanager/libhistorymanager/window.py
 
 
 TRANSLATIONS += languages/tr_TR.ts

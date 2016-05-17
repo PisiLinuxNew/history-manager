@@ -12,8 +12,7 @@ class Ui_Configure(object):
     def setupUi(self, Configure):
         Configure.setObjectName("Configure")
         Configure.resize(227, 63)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/history-manager.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon = QtGui.QIcon.fromTheme("view-history")
         Configure.setWindowIcon(icon)
         self.gridLayout = QtWidgets.QGridLayout(Configure)
         self.gridLayout.setObjectName("gridLayout")

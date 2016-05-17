@@ -6,7 +6,6 @@ from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 
 # Application Stuff
-from ui_uiitem import Ui_HistoryItemWidget
 from ui_configure import Ui_Configure
 from ui_mainwindow import Ui_MainManager
 

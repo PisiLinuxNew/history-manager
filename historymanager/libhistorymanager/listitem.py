@@ -42,8 +42,8 @@ class NewOperation(QWidget):
 
         self.alias = " - ".join([self.op_date, self.op_time])
         self.op_pack_len = len(self.op_pack)
+        self.icon = self.iconReplace(self.op_type)
 
-        self.icon = ":/pics/%s.png" % self.op_type
 
         if self.settings.contains("%d/label" % self.op_no):
             self.alias = str(self.settings.value("%d/label" % self.op_no))
@@ -51,11 +51,28 @@ class NewOperation(QWidget):
         self.ui.labelLabel.setText(self.alias)
 
         self.ui.typeLabel.setText(self.tr("No: %s   Type: %s")%(self.op_no, self.tr(opttrans[self.op_type])))
-        self.ui.iconLabel.setPixmap(QPixmap(self.icon))
+        self.ui.iconLabel.setPixmap(QIcon.fromTheme(self.icon).pixmap(24,24))
 
         self.ui.restorePB.clicked.connect(self.parent.takeBack)
         self.ui.detailsPB.clicked.connect(self.parent.loadDetails)
         self.ui.planPB.clicked.connect(self.parent.loadPlan)
+
+    def iconReplace(self, icon):
+        if icon == "install":
+            return  "package-install"
+        elif icon == "remove":
+            return "package-remove"
+        elif icon == "repoupdate":
+            return "update-none"
+        elif icon == "snapshot":
+            return "draw-star"
+        elif icon == "takeback":
+            return "draw-arrow-back"
+        elif icon == "upgrade":
+            return "package-upgrade"
+        elif icon == "unknown":
+            return  "unknown"
+
 
     def setAlias(self, txt):
         self.alias = txt

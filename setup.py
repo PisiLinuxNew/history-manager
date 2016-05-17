@@ -1,116 +1,39 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
+#
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
-# Please read the COPYING file.
+# Please read the docs/COPYING file.
 #
 
-import os
-import glob
-import shutil
-import sys
-
-from code.historymanager import about
-
-from distutils.core import setup
-from distutils.command.build import build
-from distutils.command.install import install
-
-PROJECT = about.appName
-
-def makeDirs(directory):
-    if not os.path.exists(directory):
-        try:
-            os.makedirs(directory)
-        except OSError:
-            pass
-
-def remove(path):
-    if os.path.exists(path):
-        print ' removing: ', path
-        if os.path.isdir(path):
-            shutil.rmtree(path)
-        else:
-            os.unlink(path)
-
-class Build(build):
-    def run(self):
-        # Clear all
-        os.system("rm -rf build")
-
-        # Copy codes
-        print "Copying PYs..."
-        os.system("cp -R code/ build/")
-
-        # Copy icons
-        print "Copying Images..."
-        os.system("cp -R resources/ build/")
-
-        print "Generating RCs..."
-        for filename in glob.glob1("resources", "*.qrc"):
-            os.system("pyrcc5 resources/%s -o build/%s_rc.py" % (filename, filename.split(".")[0]))
+from setuptools import setup, find_packages
+from os import listdir, system
 
 
-        for language in glob.glob1("languages", "*.ts"):
-            print language
-            os.system("lrelease-qt5 languages/%s"%language)
+langs = []
+for l in listdir('languages'):
+    if l.endswith('ts'):
+        system('lrelease-qt5 languages/%s' % l)
+        langs.append(('languages/%s' % l).replace('.ts', '.qm'))
 
-            # Copy languages
-        print "Copying Languages File..."
-        os.system("cp -R languages/ build/")
+#system("pyrcc5 resources/data.qrc -o historymanager/data_rc.py")
 
-class Install(install):
-    def run(self):
-        install.run(self)
-
-
-        root_dir = "/usr/share"
-        bin_dir = "/usr/bin"
-            
-        pixmap_dir = os.path.join(root_dir, "pixmap")
-
-        apps_dir = os.path.join(root_dir, "applications")
-        project_dir = os.path.join(root_dir, PROJECT)
-
-        # Make directories
-        print "Making directories..."
-        makeDirs(bin_dir)
-        makeDirs(apps_dir)
-        makeDirs(pixmap_dir)
-        makeDirs(project_dir)
-            
-         # Install desktop files
-        print "Installing desktop files..."
-
-        shutil.copy("resources/%s.desktop" % PROJECT, apps_dir)
-
-        shutil.copy("resources/icons/%s.png" % PROJECT, pixmap_dir)
-
-        shutil.rmtree('build/resources')
-        
-        # Install codes
-        print "Installing codes..."
-        os.system("cp -R build/* %s/" % project_dir)
-
-        os.chmod("script/history-manager", 0755)
-        shutil.copy("script/history-manager", "/usr/bin")
-
+datas = [('/usr/share/applications', ['history-manager.desktop']),
+         ('/usr/share/history-manager/languages', langs)]
 
 setup(
-        name = PROJECT,
-        version = about.version,
-        description = unicode(about.PACKAGE),
-        scripts = ["script/history-manager"],
-        license = unicode('GPL V2'),
-        author = "Pisi Linux Developers",
-        author_email = about.bugEmail,
-        url = about.homePage,
-        cmdclass          = {
-                            'build': Build,
-                            'install': Install,
-                          }
+    name = "history-manager",
+    version = "0.2.8.0",
+    description = u"Pisi Geçmiş Yöneticisi",
+    scripts = ["script/history-manager"],
+    license = 'GPL V2',
+    author = "Pisi Linux Developers",
+    author_email = "admin@pisilinux.org",
+    url = "https://www.github.com/PisiLinuxNew/history-manager",
+    packages=find_packages(),
+    data_files=datas,
+
 )
