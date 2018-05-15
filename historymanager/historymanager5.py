@@ -33,7 +33,7 @@ def main():
     app = QApplication(sys.argv)
     app.setOrganizationName("history-manager")
     app.setApplicationName("history-manager")
-    app.setApplicationVersion("0.2.8.0")
+    app.setApplicationVersion("0.2.8b")
 
     locale = QLocale.system().name()
     translator = QTranslator(app)
@@ -42,9 +42,9 @@ def main():
 
     # Create Main Widget and make some settings
     mainWindow = MainManager(None, app= app)
-    mainWindow.show()
     mainWindow.resize(640, 480)
     mainWindow.setWindowIcon(QIcon.fromTheme("view-history"))
+    mainWindow.show()
 
     # Create connection for lastWindowClosed signal to quit app
     app.lastWindowClosed.connect(app.quit)
