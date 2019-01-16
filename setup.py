@@ -16,7 +16,9 @@ from os import listdir, system
 langs = []
 for l in listdir('languages'):
     if l.endswith('ts'):
-        system('lrelease-qt5 languages/%s' % l)
+        #Temporary bindir to avoid qt4 conflicts
+        #system('lrelease-qt5 languages/%s' % l)
+        system('lrelease languages/%s' % l)
         langs.append(('languages/%s' % l).replace('.ts', '.qm'))
 
 #system("pyrcc5 resources/data.qrc -o historymanager/data_rc.py")
