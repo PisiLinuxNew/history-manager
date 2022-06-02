@@ -59,17 +59,17 @@ class NewOperation(QWidget):
 
     def iconReplace(self, icon):
         if icon == "install":
-            return  "package-install"
+            return  "/usr/share/pixmaps/icons/installed_pisi.png"
         elif icon == "remove":
-            return "package-remove"
+            return "/usr/share/pixmaps/icons/removed_pisi.png"
         elif icon == "repoupdate":
-            return "update-none"
+            return "/usr/share/pixmaps/icons/update-repo.svg"
         elif icon == "snapshot":
-            return "draw-star"
+            return "/usr/share/pixmaps/icons/system-snapshot.svg"
         elif icon == "takeback":
-            return "draw-arrow-back"
+            return "/usr/share/pixmaps/icons/take_back.svg"
         elif icon == "upgrade":
-            return "package-upgrade"
+            return "/usr/share/pixmaps/icons/updated_pisi.png"
         elif icon == "unknown":
             return  "unknown"
 
